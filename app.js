@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'assistant':
             default:
                 messageClass = 'bg-gradient-to-r from-pink-100 to-cyan-100 rounded-2xl p-4 shadow-lg border-2 border-pink-200 assistant-message';
-                iconSpan = '<span class="mr-2">A</span>';
+                iconSpan = '<span class="mr-2">🇺🇸</span>';
                 nameSpan = '<span class="text-sm font-medium text-pink-600">Smitty</span>';
                 textClass = 'text-sm text-pink-600';
         }

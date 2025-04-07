@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="apple-touch-icon" href="./logo.svg">
-  <title>LITE619238D</title>
+  <title>LITE119369D</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/umd/lucide.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -22,24 +22,24 @@
   <style>
     /* 基础变量 */
     :root {
-      --primary: #64748B;
-      --primary-light: #94A3B8;
-      --primary-dark: #475569;
-      --gray-50: #F9FAFB;
+      --primary: #002868;
+      --primary-light: #0039A6;
+      --primary-dark: #001B44;
+      --gray-50: #FFFFFF;
       --gray-100: #F3F4F6;
       --gray-200: #E5E7EB;
       --gray-300: #D1D5DB;
-      --gray-400: #9CA3AF;
-      --gray-500: #6B7280;
-      --gray-600: #4B5563;
-      --gray-700: #374151;
-      --gray-800: #1F2937;
-      --gray-900: #111827;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      --gradient-light: linear-gradient(135deg, var(--gray-100) 0%, white 100%);
-      --gradient-dark: linear-gradient(135deg, var(--gray-200) 0%, var(--gray-100) 100%);
+      --gray-400: #BF0A30;
+      --gray-500: #991B1B;
+      --gray-600: #7F1D1D;
+      --gray-700: #002868;
+      --gray-800: #001B44;
+      --gray-900: #000000;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 40, 104, 0.05);
+      --shadow: 0 1px 3px 0 rgba(0, 40, 104, 0.1);
+      --shadow-md: 0 4px 6px -1px rgba(0, 40, 104, 0.1);
+      --gradient-light: linear-gradient(135deg, #FFFFFF 0%, #F3F4F6 100%);
+      --gradient-dark: linear-gradient(135deg, #BF0A30 0%, #991B1B 100%);
     }
 
     /* 基础样式 */
@@ -498,10 +498,10 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --gray-50: #1a1a1a;
-        --gray-100: #262626;
-        --gray-200: #404040;
-        --gray-900: #f5f5f5;
+        --gray-50: #000000;
+        --gray-100: #001B44;
+        --gray-200: #002868;
+        --gray-900: #FFFFFF;
       }
 
       body {
@@ -588,7 +588,7 @@
 </head>
 <body class="light-theme">
   <div class="header-info">
-    <span>LITE619238D</span>
+    <span>LITE119369D</span>
     <span>·</span>
     <span>基于SMT自研模型SMITTY（基础轻量级模型）</span>
   </div>
@@ -604,8 +604,8 @@
           </svg>
         </div>
         <div class="message-content">
-          <h2>欢迎使用 LITE AI助</h2>
-          <p>右下角点击📂启用知识库，私人定制版619238D</p>
+          <h2>我可以为您解答"特朗普关税问题"</h2>
+          <p>注意：AI答复仅作参考！私人定制版216593D</p>
           <p>产品升级或问题反馈：smtoffice@yeah.net</p>
         </div>
       </div>
@@ -734,10 +734,12 @@
         // 自动加载知识库
         loadKnowledgeBase();
         
-        // 如果知识库加载成功，显示切换按钮
+        // 强制启用知识库
         if (loadedKnowledgeBaseContent) {
-          document.getElementById('toggleKbButton').classList.remove('hidden');
-          console.log('知识库已加载，显示切换按钮。');
+          isKnowledgeBaseEnabled = true; // 默认启用知识库
+          document.getElementById('toggleKbButton').classList.add('hidden'); // 隐藏切换按钮
+          console.log('知识库已加载并强制启用');
+          showToast('知识库模式已启用');
         }
         
         const messageInput = document.getElementById('messageInput');
@@ -931,21 +933,17 @@
     }
     
     // 新增：切换知识库使用状态
+    // 修改切换知识库函数，使其无法关闭
     function toggleKnowledgeBaseUsage() {
       if (!loadedKnowledgeBaseContent) {
         showToast('知识库未加载，无法切换');
         return;
       }
       
-      isKnowledgeBaseEnabled = !isKnowledgeBaseEnabled; // 切换状态
-      const kbIcon = document.getElementById('kbIcon');
-      
-      if (isKnowledgeBaseEnabled) {
-        kbIcon.textContent = '◀️'; // 已启用，显示禁用图标
-        showToast('知识库已启用');
-      } else {
-        kbIcon.textContent = '📂'; // 修改已禁用时显示的图标
-        showToast('已切换至正常对话模式');
+      // 始终保持启用状态
+      if (!isKnowledgeBaseEnabled) {
+        isKnowledgeBaseEnabled = true;
+        showToast('知识库模式已启用');
       }
     }
     
@@ -1005,7 +1003,7 @@
         let messageToSend = message;
         if (isKnowledgeBaseEnabled && loadedKnowledgeBaseContent) {
           // 构建包含知识库的完整提示
-          messageToSend = `请优先根据以下"知识库"内容回答问题。如果用户问题涉及知识库没有的信息，请你用自己的知识直接回答用户的问题！！！
+          messageToSend = `请优先根据以下"知识库"内容回答问题。如果用户问题涉及知识库没有的信息，请酌情处理！
 
 --- 知识库开始 ---
 ${loadedKnowledgeBaseContent}
@@ -1061,7 +1059,7 @@ ${loadedKnowledgeBaseContent}
       
       const avatarDiv = document.createElement('div');
       avatarDiv.className = 'message-avatar assistant-avatar';
-      avatarDiv.innerHTML = '<span>🅰️</span>';
+      avatarDiv.innerHTML = '<span>🇺🇸</span>';
       
       const contentDiv = document.createElement('div');
       contentDiv.className = 'message-content';
